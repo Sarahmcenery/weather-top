@@ -1,24 +1,29 @@
-<table class="table is-bordered">
+<table class="table is-bordered ">
   <thead class="has-background-grey-light">
   <tr>
     <th>Code</th>
     <th>Temperature</th>
     <th>Wind Speed</th>
+    <th>Pressure</th>
   </tr>
   </thead>
   <tbody>
-  #{list items:_station.readings, as:'readings'}
+  #{list items:_station.readings, as:'reading'}
   <tr>
     <td>
-      ${readings.code}
+      ${reading.code}
     </td>
     <td>
-      ${readings.temperature}
+      ${reading.temperature}
     </td>
     <td>
-      ${readings.windSpeed}
+      ${reading.windSpeed}
+    </td>
+    <td>
+      ${reading.pressure}
     </td>
   </tr>
   #{/list}
   </tbody>
 </table>
+
