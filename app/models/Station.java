@@ -44,6 +44,7 @@ public class Station extends Model {
 		int latestCode = readings.get(readings.size() - 1).getCode();
 		return latestCode;
 	}
+
 	public double lastWind(double windSpeed) {
 		double latestWind = readings.get(readings.size() - 1).getWindSpeed();
 		return latestWind;
@@ -57,7 +58,9 @@ public class Station extends Model {
 		return lastTemp(this.latestTemp);
 	}
 
-	public int latestPressure() {return lastPressure(this.pressure);}
+	public int latestPressure() {
+		return lastPressure(this.pressure);
+	}
 
 	public double latestWind() {
 		return lastWind(this.windSpeed);
