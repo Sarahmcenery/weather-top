@@ -6,7 +6,6 @@
  * and also converts the latest wind direction reading to a compass direction.
  *
  * @author Sarah Mc Enery
- * @version 3.0
  */
 
 package models;
