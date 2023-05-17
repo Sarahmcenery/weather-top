@@ -13,4 +13,11 @@ public class StationCtrl extends Controller {
 		Logger.info("Station id =" + id);
 		render("station.html", station);
 	}
+	public static void addReading(Long id, String name, int code, double temperature, double windSpeed, int pressure, double windDirection) {
+		Reading reading = new Reading(name, code, temperature, windSpeed, pressure, windDirection);
+		Station station = Station.findById(id);
+		station.readings.add(reading);
+		station.save();
+		redirect("/stations/" + id);
+	}
 }

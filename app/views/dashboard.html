@@ -8,79 +8,11 @@
   <h1 class="title">
     ${station.name}
   </h1>
-  <div class="block">
-  </div>
-  <div class="tile is-ancestor">
-    <div class="tile is-parent">
-      <article class="tile is-child box has-background-black has-text-white">
-        <span class="icon-text">
-          <span>${station.name}</span>
-            <span class="icon">
-               <i class="fa-solid fa-location-dot"></i>
-            </span>
-        </span>
-      </article>
-    </div>
-    <div class="tile is-parent">
-      <article class="tile is-child box has-background-black has-text-white">
-        <span class="icon-text">
-          <span>Weather</span>
-            <span class="icon">
-               <i class="fas fa-cloud"></i>
-            </span>
-        </span>
-        <br/>
-        <br/>
-        <p>${station.codeToText()}</p>
-      </article>
-    </div>
-    </span>
-    <div class="tile  is-parent">
-      <article class="tile is-child box has-background-black has-text-white">
-        <span class="icon-text">
-          <span>Temp</span>
-            <span class="icon">
-               <i class="fas fa-temperature-full"></i>
-            </span>
-        </span>
-        <br/>
-        <br/>
-       <p> ${station.temp()} C
-        <br/>
-         ${station.fahrenheit()} F
-       </p>
-      </article>
-    </div>
-    <div class="tile  is-parent">
-      <article class="tile is-child box has-background-black has-text-white">
-        <span class="icon-text">
-          <span>Wind</span>
-            <span class="icon">
-               <i class="fas fa-wind"></i>
-            </span>
-        </span>
-        <br/>
-        <br/>
-        <p> ${station.kmToBeaufort()} Bft </p>
-        <br/>
-      </article>
-    </div>
-    <div class="tile  is-parent">
-      <article class="tile is-child box has-background-black has-text-white">
-        <span class="icon-text">
-          <span>Pressure</span>
-            <span class="icon">
-              <i class="fa-sharp fa-solid fa-gauge-simple"></i>
-            </span>
-        </span>
-        <br/>
-        <br/>
-        <p> ${station.latestPressure()} hpa </p>
-      </article>
-    </div>
-    <h1 class="title">
-    </h1>
-  </div>
-  #{listReadings station:station /}
+  <p>
+    <a href="/stations/${station.id}"><span class="icon is-large has-text-black">
+    <i class="fas fa-folder"></i>
+    </span> </a>
+  </p>
 </div>
 #{/list}
+#{addstation /}

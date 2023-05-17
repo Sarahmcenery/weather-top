@@ -1,0 +1,39 @@
+<form action="/stations/${_station.id}/addreading" method="POST">
+  <div class="columns">
+    <div class="field column">
+      <label class="label">Code</label>
+      <div class="control">
+        <input class="input" placeholder="00" type=float" name="code">
+      </div>
+    </div>
+    <div class="field column">
+      <label class="label">Temperature</label>
+      <div class="control">
+        <input class="input" placeholder="00.0C" type="double" name="temperature">
+      </div>
+    </div>
+    <div class="field column">
+      <label class="label">Wind Speed</label>
+      <div class="control">
+        <input class="input" placeholder="00.00kmh" type="double" name="windSpeed">
+      </div>
+    </div>
+    <div class="field column">
+      <label class="label">Wind Direction</label>
+      <div class="control">
+        <input class="input" placeholder="000deg" type="double" name="windDirection">
+      </div>
+    </div>
+    <div class="field column">
+      <label class="label">Pressure</label>
+      <div class="control">
+        <input class="input" placeholder="000hPa" type="double" name="pressure">
+      </div>
+    </div>
+  </div>
+  <div class="field mt-4">
+    <div class="control">
+      <button class="button is-dark">Submit Report</button>
+    </div>
+  </div>
+</form>

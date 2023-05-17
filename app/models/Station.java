@@ -18,18 +18,16 @@ public class Station extends Model {
 	public double windSpeed;
 	public double temperature;
 	public int pressure;
+	public double windDirection;
 	public int latestCode;
 	public double latestTemp;
+	public double celsiusToFahrenheit;
 
-	public Station(String name, int code, double temperature, double windSpeed, int pressure) {
+	public Station(String name) {
 		this.name = name;
-		this.code = code;
-		this.temperature = temperature;
-		this.windSpeed = windSpeed;
-		this.pressure = pressure;
 	}
 
-	//methods to get the latest weather readings from yaml.
+	//methods to get the latest weather readings
 	public double lastTemp(double temperature) {
 		double temp = readings.get(readings.size() - 1).getTemperature();
 		return temp;
@@ -45,13 +43,18 @@ public class Station extends Model {
 		return latestCode;
 	}
 
-	public double lastWind(double windSpeed) {
-		double latestWind = readings.get(readings.size() - 1).getWindSpeed();
-		return latestWind;
+	public double lastWindSpeed(double windSpeed) {
+		double latestWindSpeed = readings.get(readings.size() - 1).getWindSpeed();
+		return latestWindSpeed;
 	}
 
-	public int latestCode() {
-		return lastCode(this.latestCode);
+	public double lastWindDirection(double windDirection) {
+		double latestWindDirection = readings.get(readings.size() - 1).getWindDirection();
+		return latestWindDirection;
+	}
+
+	public double latestWindDirection() {
+		return lastWindDirection(this.windDirection);
 	}
 
 	public double temp() {
@@ -62,19 +65,39 @@ public class Station extends Model {
 		return lastPressure(this.pressure);
 	}
 
-	public double latestWind() {
-		return lastWind(this.windSpeed);
+	public double latestWindSpeed() {
+		return lastWindSpeed(this.windSpeed);
 	}
 
 	public double fahrenheit() {
 		return celsiusToFahrenheit(this.latestTemp);
 	}
 
-	//Convert temperature from c to f
+	public double windChill() {
+		return convertWind(this.windSpeed, this.temperature);
+	}
+
+	public int latestCode() {
+		return lastCode(this.latestCode);
+	}
+
+	private double toTwoDecimalPlaces(double num) {
+		return (int) (num * 100) / 100.0;
+	}
+
+	//Converts temperature from c to f
 	public double celsiusToFahrenheit(double temperature) {
 		double temp = readings.get(readings.size() - 1).getTemperature();
 		double fahrenheit = (temp * 9 / 5 + 32);
 		return fahrenheit;
+	}
+
+	//Calculates windchill using the latest readings for both temperature and wind speed
+	public double convertWind(double windSpeed, double temperature) {
+		double temp = readings.get(readings.size() - 1).getTemperature();
+		double latestWind = readings.get(readings.size() - 1).getWindSpeed();
+		double windChill = (13.12 + (0.6215 * (temp)) - 11.37 * Math.pow(latestWind, 0.16) + 0.3965 * (temp * Math.pow(latestWind, 0.16)));
+		return toTwoDecimalPlaces(windChill);
 	}
 
 	//switch statement to convert the weather code to the latest weather condition
@@ -106,32 +129,76 @@ public class Station extends Model {
 	//converts the latest wind speed in km/h to the correct number on the beaufort scale
 	public String kmToBeaufort() {
 		String codeString = "Invalid Reading. Please enter a valid wind speed.";
-		if (latestWind() == 1) {
+		if (latestWindSpeed() == 1) {
 			return ("0 bft - Calm");
-		} else if (latestWind() >= 1 && latestWind() <= 5) {
+		} else if (latestWindSpeed() >= 1 && latestWindSpeed() <= 5) {
 			return ("1 bft - Light Air");
-		} else if (latestWind() >= 6 && latestWind() <= 11) {
+		} else if (latestWindSpeed() >= 6 && latestWindSpeed() <= 11) {
 			return ("2 bft - Light Breeze");
-		} else if (latestWind() >= 12 && latestWind() <= 19) {
+		} else if (latestWindSpeed() >= 12 && latestWindSpeed() <= 19) {
 			return ("3 bft - Gentle Breeze");
-		} else if (latestWind() >= 20 && latestWind() <= 28) {
+		} else if (latestWindSpeed() >= 20 && latestWindSpeed() <= 28) {
 			return ("4 bft - Moderate Breeze");
-		} else if (latestWind() >= 29 && latestWind() <= 38) {
+		} else if (latestWindSpeed() >= 29 && latestWindSpeed() <= 38) {
 			return ("5 bft - Fresh Breeze");
-		} else if (latestWind() >= 39 && latestWind() <= 49) {
+		} else if (latestWindSpeed() >= 39 && latestWindSpeed() <= 49) {
 			return ("6 bft - Strong Breeze");
-		} else if (latestWind() >= 50 && latestWind() <= 61) {
+		} else if (latestWindSpeed() >= 50 && latestWindSpeed() <= 61) {
 			return ("7 bft - Near Gale");
-		} else if (latestWind() >= 62 && latestWind() <= 74) {
+		} else if (latestWindSpeed() >= 62 && latestWindSpeed() <= 74) {
 			return ("8 bft - Gale");
-		} else if (latestWind() >= 75 && latestWind() <= 88) {
+		} else if (latestWindSpeed() >= 75 && latestWindSpeed() <= 88) {
 			return ("9 bft - Severe Gale");
-		} else if (latestWind() >= 89 && latestWind() <= 102) {
+		} else if (latestWindSpeed() >= 89 && latestWindSpeed() <= 102) {
 			return ("10 bft - Strong Storm");
-		} else if (latestWind() >= 103 && latestWind() <= 117) {
+		} else if (latestWindSpeed() >= 103 && latestWindSpeed() <= 117) {
 			return ("11 bft - Violent Storm");
 		}
 		return codeString;
+	}
+
+	//converts the latest wind direction reading to a compass direction
+	public String windDirectionToCompass() {
+
+		String codeString = "Invalid Reading";
+		{
+			if (latestWindDirection() >= 0 && latestWindDirection() < 11.25) {
+				return ("North");
+			} else if (latestWindDirection() >= 348.75 && latestWindDirection() <= 360.00) {
+				return ("North");
+			} else if (latestWindDirection() >= 11.25 && latestWindDirection() < 33.75) {
+				return ("North North East");
+			} else if (latestWindDirection() >= 33.75 && latestWindDirection() < 56.25) {
+				return ("North East");
+			} else if (latestWindDirection() >= 56.25 && latestWindDirection() < 78.75) {
+				return ("East North East");
+			} else if (latestWindDirection() >= 78.75 && latestWindDirection() < 101.25) {
+				return ("East");
+			} else if (latestWindDirection() >= 101.25 && latestWindDirection() < 123.75) {
+				return ("East South East");
+			} else if (latestWindDirection() >= 123.75 && latestWindDirection() < 146.25) {
+				return ("South East");
+			} else if (latestWindDirection() >= 146.25 && latestWindDirection() < 168.75) {
+				return ("South South East");
+			} else if (latestWindDirection() >= 168.75 && latestWindDirection() < 191.25) {
+				return ("South");
+			} else if (latestWindDirection() >= 191.25 && latestWindDirection() < 213.75) {
+				return ("South South West");
+			} else if (latestWindDirection() >= 213.75 && latestWindDirection() < 236.25) {
+				return ("South West");
+			} else if (latestWindDirection() >= 236.25 && latestWindDirection() < 258.75) {
+				return ("West South West");
+			} else if (latestWindDirection() >= 258.75 && latestWindDirection() < 281.25) {
+				return ("West");
+			} else if (latestWindDirection() >= 281.25 && latestWindDirection() < 303.75) {
+				return ("West North West");
+			} else if (latestWindDirection() >= 303.75 && latestWindDirection() < 326.25) {
+				return ("North West");
+			} else if (latestWindDirection() >= 326.25 && latestWindDirection() < 348.75) {
+				return ("North North West");
+			}
+			return codeString;
+		}
 	}
 }
 

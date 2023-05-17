@@ -1,0 +1,109 @@
+#{extends 'main.html' /}
+#{set title:'Station' /}
+
+#{menu id:"dashboard"/}
+
+<div class="content box">
+  <h1 class="title">
+    ${station.name}
+  </h1>
+  <div class="block">
+  </div>
+  <div class="tile is-ancestor">
+    <div class="tile is-parent">
+      <article class="tile is-child box has-background-black has-text-white">
+        <span class="icon-text">
+          <span>${station.name}</span>
+            <span class="icon">
+               <i class="fa-solid fa-location-dot"></i>
+            </span>
+        </span>
+      </article>
+    </div>
+    <div class="tile is-parent">
+      <article class="tile is-child box has-background-black has-text-white">
+        <span class="icon-text">
+          <span>Weather</span>
+            <span class="icon">
+               <i class="fas fa-cloud"></i>
+            </span>
+        </span>
+        <br/>
+        <br/>
+        #{if station.readings.size() > 0}
+        <p>${station.codeToText()}</p>
+        #{/if}
+        #{else}
+        No reading available
+        #{/else}
+      </article>
+    </div>
+    </span>
+    <div class="tile  is-parent">
+      <article class="tile is-child box has-background-black has-text-white">
+        <span class="icon-text">
+          <span>Temp</span>
+            <span class="icon">
+               <i class="fas fa-temperature-full"></i>
+            </span>
+        </span>
+        <br/>
+        <br/>
+        #{if station.readings.size() > 0}
+        <p> ${station.temp()} °C
+          <br/>
+          ${station.fahrenheit()} °F
+        </p>
+        #{/if}
+        #{else}
+        No reading available
+        #{/else}
+      </article>
+    </div>
+    <div class="tile  is-parent">
+      <article class="tile is-child box has-background-black has-text-white">
+        <span class="icon-text">
+          <span>Wind</span>
+            <span class="icon">
+               <i class="fas fa-wind"></i>
+            </span>
+        </span>
+        <br/>
+        <br/>
+        #{if station.readings.size() > 0}
+        <p> ${station.kmToBeaufort()}
+          <br/>
+        ${station.windDirectionToCompass()}
+          <br/>
+          Feels like ${station.windChill()} °C
+        </p>
+        #{/if}
+        #{else}
+        No reading available
+        #{/else}
+      </article>
+    </div>
+    <div class="tile  is-parent">
+      <article class="tile is-child box has-background-black has-text-white">
+        <span class="icon-text">
+          <span>Pressure</span>
+            <span class="icon">
+              <i class="fa-sharp fa-solid fa-gauge-simple"></i>
+            </span>
+        </span>
+        <br/>
+        <br/>
+        #{if station.readings.size() > 0}
+        <p> ${station.latestPressure()} hpa </p>
+        #{/if}
+        #{else}
+        No reading available
+        #{/else}
+      </article>
+    </div>
+    <h1 class="title">
+    </h1>
+  </div>
+  #{listReadings station:station /}
+  #{addreading station:station /}
+</div>

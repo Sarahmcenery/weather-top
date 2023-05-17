@@ -11,14 +11,16 @@ public class Reading extends Model {
 	public double temperature;
 	public double windSpeed;
 	public int pressure;
+	public double windDirection;
 	public Reading() {
 	}
-	public Reading(String name, int code, double temperature, double windSpeed, int pressure) {
+	public Reading(String name, int code, double temperature, double windSpeed, int pressure, double windDirection) {
 		this.name = name;
 		this.code = code;
 		this.temperature = temperature;
 		this.windSpeed = windSpeed;
 		this.pressure = pressure;
+		this.windDirection = windDirection;
 	}
 
 	//****************getters********************
@@ -48,6 +50,11 @@ public class Reading extends Model {
 		return pressure;
 	}
 
+	//returns the wind direction
+	public double getWindDirection() {
+		return windDirection;
+	}
+
 	//****************setters*********************
 
 	//updates the name to the value passed as a parameter.The new name
@@ -73,6 +80,11 @@ public class Reading extends Model {
 	//updates the pressure to the value passed as a parameter.The new pressure
 	public void setPressure(int pressure) {
 		this.pressure = pressure;
+	}
+
+	//updates the wind direction to the value passed as a parameter.The new wind direction
+	public void setWindDirection(double windDirection) {
+		this.windDirection = windDirection;
 	}
 
 }
