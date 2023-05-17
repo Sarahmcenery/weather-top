@@ -1,6 +1,6 @@
 /**
  * This class returns the latest weather readings for each field.
- *
+ * <p>
  * It includes a method to convert Celsius to Fahrenheit and a method to calculate windchill.
  * It uses the latest weather code to output the corresponding weather condition
  * and also converts the latest wind direction reading to a compass direction.
@@ -34,8 +34,14 @@ public class Station extends Model {
 	public double latestTemp;
 	public double celsiusToFahrenheit;
 
-	public Station(String name) {
+	public double latitude;
+
+	public double longitude;
+
+	public Station(String name, double latitude, double longitude) {
 		this.name = name;
+		this.latitude = latitude;
+		this.longitude = longitude;
 	}
 
 	//methods to get the latest weather readings
@@ -43,8 +49,18 @@ public class Station extends Model {
 		if (readings.size() > 0) {
 			return readings.get(readings.size() - 1);
 		} else {
-			return new Reading(name, 0, 0, 0, 0, 0);
+			return new Reading(name, 0, 0, 0, 0, 0, 0, 0);
 		}
+	}
+
+	public double decimalDegreesLat(double latitude) {
+		double lat = this.latitude;
+		return toTwoDecimalPlaces(lat);
+	}
+
+	public double decimalDegreesLng(double longitude) {
+		double lng = this.longitude;
+		return toTwoDecimalPlaces(lng);
 	}
 
 	public int latestCode() {
@@ -63,14 +79,11 @@ public class Station extends Model {
 		return latestWeather().getPressure();
 	}
 
-	public double latestWindDirection() {
-		return latestWeather().getWindDirection();
-	}
+	public double latestWindDirection() {return latestWeather().getWindDirection();}
 
 	public double windChill() {
 		return convertWind(this.windSpeed, this.temperature);
 	}
-
 
 	private double toTwoDecimalPlaces(double num) {
 		return (int) (num * 100) / 100.0;
@@ -78,6 +91,14 @@ public class Station extends Model {
 
 	public double fahrenheit() {
 		return celsiusToFahrenheit(this.latestTemp);
+	}
+
+	public double lat() {
+		return decimalDegreesLat(this.latitude);
+	}
+
+	public double lng() {
+		return decimalDegreesLng(this.longitude);
 	}
 
 	/**
@@ -105,6 +126,7 @@ public class Station extends Model {
 		double windChill = (13.12 + (0.6215 * (temp)) - 11.37 * Math.pow(latestWind, 0.16) + 0.3965 * (temp * Math.pow(latestWind, 0.16)));
 		return toTwoDecimalPlaces(windChill);
 	}
+
 
 	/**
 	 * A switch statement to convert the weather code to the corresponding weather condition

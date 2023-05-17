@@ -13,16 +13,21 @@ public class Reading extends Model {
 	public int pressure;
 	public double windDirection;
 
+	public double latitude;
+	public double longitude;
+
 	public Reading() {
 	}
 
-	public Reading(String name, int code, double temperature, double windSpeed, int pressure, double windDirection) {
+	public Reading(String name, int code, double temperature, double windSpeed, int pressure, double windDirection, double latitude, double longitude) {
 		this.name = name;
 		this.code = code;
 		this.temperature = temperature;
 		this.windSpeed = windSpeed;
 		this.pressure = pressure;
 		this.windDirection = windDirection;
+		this.latitude = latitude;
+		this.longitude = longitude;
 	}
 
 	//****************getters********************
@@ -57,6 +62,12 @@ public class Reading extends Model {
 		return windDirection;
 	}
 
+	//returns the latitude
+	public double getLatitude() {return latitude;}
+
+	//returns the longitude
+	public double getLongitude() {return longitude;}
+
 	//****************setters*********************
 
 	//updates the name to the value passed as a parameter.The new name
@@ -89,4 +100,11 @@ public class Reading extends Model {
 		this.windDirection = windDirection;
 	}
 
+	//updates the latitude to the value passed as a parameter.The new latitude
+	public void setLatitude(double latitude) {
+		this.latitude = latitude;
+	}
+
+	//updates the longitude to the value passed as a parameter.The new longitude
+	public void setLongitude(double longitude) {this.longitude = longitude;}
 }
