@@ -3,6 +3,10 @@
 
 #{menu id:"dashboard"/}
 
+<header class="title is-2 has-text-white has-background-grey-light">
+  ${member.firstname} ${member.lastname}'s Weather Stations
+</header>
+
 #{list items:stations, as:'station'}
 <div class="content box">
   <h1 class="title">

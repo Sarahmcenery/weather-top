@@ -58,6 +58,10 @@
         <p> ${station.latestTemperature()} °C
           <br/>
           ${station.fahrenheit()} °F
+          <br/>
+          Min: ${minimumTemperature.temperature} °C
+          <br/>
+          Max: ${maximumTemperature.temperature} °C
         </p>
         #{/if}
         #{else}
@@ -81,6 +85,10 @@
           ${station.windDirectionToCompass()}
           <br/>
           Feels like ${station.windChill()} °C
+          <br/>
+          Min: ${minimumWindSpeed.windSpeed} km/h
+          <br/>
+          Max: ${maximumWindSpeed.windSpeed} km/h
         </p>
         #{/if}
         #{else}
@@ -99,7 +107,12 @@
         <br/>
         <br/>
         #{if station.readings.size() > 0}
-        <p> ${station.latestPressure()} hpa </p>
+        <p> ${station.latestPressure()} hpa
+          <br />
+          Min: ${minimumPressure.pressure}
+          <br />
+          Max: ${maximumPressure.pressure}
+        </p>
         #{/if}
         #{else}
         No reading available

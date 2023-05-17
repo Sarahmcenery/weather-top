@@ -6,13 +6,21 @@ import models.Station;
 import models.Reading;
 import play.Logger;
 import play.mvc.Controller;
+import utils.StationAnalytics;
 
 
 public class StationCtrl extends Controller {
 	public static void index(Long id) {
+
 		Station station = Station.findById(id);
 		Logger.info("Station id =" + id);
-		render("station.html", station);
+		Reading minimumPressure = StationAnalytics.getMinimumPressure(station.readings);
+		Reading maximumPressure = StationAnalytics.getMaximumPressure(station.readings);
+		Reading minimumWindSpeed = StationAnalytics.getMinimumWindSpeed(station.readings);
+		Reading maximumWindSpeed = StationAnalytics.getMaximumWindSpeed(station.readings);
+		Reading minimumTemperature = StationAnalytics.getMinimumTemperature(station.readings);
+		Reading maximumTemperature = StationAnalytics.getMaximumTemperature(station.readings);
+		render("station.html", station, minimumPressure, maximumPressure, minimumWindSpeed, maximumWindSpeed, minimumTemperature, maximumTemperature);
 	}
 
 	public static void addReading(Long id, String name, int code, double temperature, double windSpeed, int pressure, int windDirection, double latitude, double longitude) {

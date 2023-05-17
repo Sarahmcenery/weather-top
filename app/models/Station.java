@@ -1,6 +1,6 @@
 /**
  * This class returns the latest weather readings for each field.
- * <p>
+ *
  * It includes a method to convert Celsius to Fahrenheit and a method to calculate windchill.
  * It uses the latest weather code to output the corresponding weather condition
  * and also converts the latest wind direction reading to a compass direction.
