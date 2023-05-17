@@ -50,7 +50,7 @@
         <br/>
         <br/>
         #{if station.readings.size() > 0}
-        <p> ${station.temp()} °C
+        <p> ${station.latestTemperature()} °C
           <br/>
           ${station.fahrenheit()} °F
         </p>
@@ -73,7 +73,7 @@
         #{if station.readings.size() > 0}
         <p> ${station.kmToBeaufort()}
           <br/>
-        ${station.windDirectionToCompass()}
+          ${station.windDirectionToCompass()}
           <br/>
           Feels like ${station.windChill()} °C
         </p>

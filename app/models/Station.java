@@ -1,3 +1,14 @@
+/**
+ * This class returns the latest weather readings for each field.
+ *
+ * It includes a method to convert Celsius to Fahrenheit and a method to calculate windchill.
+ * It uses the latest weather code to output the corresponding weather condition
+ * and also converts the latest wind direction reading to a compass direction.
+ *
+ * @author Sarah Mc Enery
+ * @version 3.0
+ */
+
 package models;
 
 import java.util.ArrayList;
@@ -28,71 +39,66 @@ public class Station extends Model {
 	}
 
 	//methods to get the latest weather readings
-	public double lastTemp(double temperature) {
-		double temp = readings.get(readings.size() - 1).getTemperature();
-		return temp;
+	public Reading latestWeather() {
+		if (readings.size() > 0) {
+			return readings.get(readings.size() - 1);
+		} else {
+			return new Reading(name, 0, 0, 0, 0, 0);
+		}
 	}
 
-	public int lastPressure(int pressure) {
-		int latestPressure = readings.get(readings.size() - 1).getPressure();
-		return latestPressure;
+	public int latestCode() {
+		return latestWeather().getCode();
 	}
 
-	public int lastCode(int code) {
-		int latestCode = readings.get(readings.size() - 1).getCode();
-		return latestCode;
-	}
-
-	public double lastWindSpeed(double windSpeed) {
-		double latestWindSpeed = readings.get(readings.size() - 1).getWindSpeed();
-		return latestWindSpeed;
-	}
-
-	public double lastWindDirection(double windDirection) {
-		double latestWindDirection = readings.get(readings.size() - 1).getWindDirection();
-		return latestWindDirection;
-	}
-
-	public double latestWindDirection() {
-		return lastWindDirection(this.windDirection);
-	}
-
-	public double temp() {
-		return lastTemp(this.latestTemp);
-	}
-
-	public int latestPressure() {
-		return lastPressure(this.pressure);
+	public double latestTemperature() {
+		return latestWeather().getTemperature();
 	}
 
 	public double latestWindSpeed() {
-		return lastWindSpeed(this.windSpeed);
+		return latestWeather().getWindSpeed();
 	}
 
-	public double fahrenheit() {
-		return celsiusToFahrenheit(this.latestTemp);
+	public int latestPressure() {
+		return latestWeather().getPressure();
+	}
+
+	public double latestWindDirection() {
+		return latestWeather().getWindDirection();
 	}
 
 	public double windChill() {
 		return convertWind(this.windSpeed, this.temperature);
 	}
 
-	public int latestCode() {
-		return lastCode(this.latestCode);
-	}
 
 	private double toTwoDecimalPlaces(double num) {
 		return (int) (num * 100) / 100.0;
 	}
 
-	//Converts temperature from c to f
+	public double fahrenheit() {
+		return celsiusToFahrenheit(this.latestTemp);
+	}
+
+	/**
+	 * Converts the latest temperature reading from Celsius to Fahrenheit
+	 *
+	 * @param temperature The temperature in Celsius
+	 * @return The temperature in Fahrenheit
+	 */
 	public double celsiusToFahrenheit(double temperature) {
 		double temp = readings.get(readings.size() - 1).getTemperature();
 		double fahrenheit = (temp * 9 / 5 + 32);
 		return fahrenheit;
 	}
 
-	//Calculates windchill using the latest readings for both temperature and wind speed
+	/**
+	 * Calculates windchill using the latest readings for both temperature and wind speed
+	 *
+	 * @param windSpeed   The windSpeed in km/h
+	 * @param temperature The temperature in Celsius
+	 * @return The windChill in Celsius, to two decimal places
+	 */
 	public double convertWind(double windSpeed, double temperature) {
 		double temp = readings.get(readings.size() - 1).getTemperature();
 		double latestWind = readings.get(readings.size() - 1).getWindSpeed();
@@ -100,7 +106,9 @@ public class Station extends Model {
 		return toTwoDecimalPlaces(windChill);
 	}
 
-	//switch statement to convert the weather code to the latest weather condition
+	/**
+	 * A switch statement to convert the weather code to the corresponding weather condition
+	 */
 	public String codeToText() {
 		{
 			switch ((readings.get(readings.size() - 1).getCode())) {
@@ -126,7 +134,10 @@ public class Station extends Model {
 		}
 	}
 
-	//converts the latest wind speed in km/h to the correct number on the beaufort scale
+	/**
+	 * Converts the latest wind speed in km/h to the correct number and label on the beaufort scale
+	 * Returns invalid reading if the user inputs a wind speed not on the beaufort scale
+	 */
 	public String kmToBeaufort() {
 		String codeString = "Invalid Reading. Please enter a valid wind speed.";
 		if (latestWindSpeed() == 1) {
@@ -157,7 +168,10 @@ public class Station extends Model {
 		return codeString;
 	}
 
-	//converts the latest wind direction reading to a compass direction
+	/**
+	 * Converts the latest wind direction reading to a compass direction
+	 * Returns invalid reading if the user inputs a wind direction outside the degree range
+	 */
 	public String windDirectionToCompass() {
 
 		String codeString = "Invalid Reading";
@@ -201,5 +215,4 @@ public class Station extends Model {
 		}
 	}
 }
-
 
