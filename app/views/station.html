@@ -11,7 +11,7 @@
   </div>
   <div class="tile is-ancestor">
     <div class="tile is-parent">
-      <article class="tile is-child box has-background-black has-text-white">
+      <article class="tile is-child box has-background-dark has-text-white">
         <span class="icon-text">
           <span>${station.name}</span>
             <span class="icon">
@@ -26,26 +26,42 @@
       </article>
     </div>
     <div class="tile is-parent">
-      <article class="tile is-child box has-background-black has-text-white">
+      <article class="tile is-child box has-background-dark has-text-white">
         <span class="icon-text">
           <span>Weather</span>
-            <span class="icon">
-               <i class="fas fa-cloud"></i>
-            </span>
+           <span class="icon">
+           #{if station.codeToText()=="Clear"} <i class="fa-solid fa-sun"></i>
+           #{/if}
+             #{elseif station.codeToText()=="Partial Clouds"} <i class="fa-solid fa-cloud-sun"></i>
+             #{/elseif}
+             #{elseif station.codeToText()=="Cloudy"} <i class="fa-solid fa-cloud"></i>
+             #{/elseif}
+             #{elseif station.codeToText()=="Light Showers"} <i class="fa-solid fa-umbrella"></i>
+             #{/elseif}
+             #{elseif station.codeToText()=="Heavy Showers"} <i class="fa-solid fa-cloud-showers-heavy"></i>
+             #{/elseif}
+             #{elseif station.codeToText()=="Rain"} <i class="fa-solid fa-droplet"></i>
+             #{/elseif}
+             #{elseif station.codeToText()=="Snow"} <i class="fa-solid fa-snowflake"></i>
+             #{/elseif}
+             #{elseif station.codeToText()=="Thunder"} <i class="fa-solid fa-bolt"></i>
+             #{/elseif}
         </span>
+           </span>
         <br/>
         <br/>
         #{if station.readings.size() > 0}
-        <p>${station.codeToText()}</p>
-        #{/if}
-        #{else}
-        No reading available
-        #{/else}
+        <p>${station.codeToText()}
+          #{/if}
+          #{else}
+          No reading available
+          #{/else}
+        </p>
       </article>
     </div>
     </span>
     <div class="tile  is-parent">
-      <article class="tile is-child box has-background-black has-text-white">
+      <article class="tile is-child box has-background-dark has-text-white">
         <span class="icon-text">
           <span>Temp</span>
             <span class="icon">
@@ -57,7 +73,7 @@
         #{if station.readings.size() > 0}
         <p> ${station.latestTemperature()} °C
           <br/>
-          ${station.fahrenheit()} °F
+          ${fahrenheit} °F
           <br/>
           Min: ${minimumTemperature.temperature} °C
           <br/>
@@ -70,7 +86,7 @@
       </article>
     </div>
     <div class="tile  is-parent">
-      <article class="tile is-child box has-background-black has-text-white">
+      <article class="tile is-child box has-background-dark has-text-white">
         <span class="icon-text">
           <span>Wind</span>
             <span class="icon">
@@ -97,7 +113,7 @@
       </article>
     </div>
     <div class="tile  is-parent">
-      <article class="tile is-child box has-background-black has-text-white">
+      <article class="tile is-child box has-background-dark has-text-white">
         <span class="icon-text">
           <span>Pressure</span>
             <span class="icon">
@@ -108,9 +124,9 @@
         <br/>
         #{if station.readings.size() > 0}
         <p> ${station.latestPressure()} hpa
-          <br />
+          <br/>
           Min: ${minimumPressure.pressure}
-          <br />
+          <br/>
           Max: ${maximumPressure.pressure}
         </p>
         #{/if}

@@ -78,7 +78,9 @@ public class Station extends Model {
 		return latestWeather().getPressure();
 	}
 
-	public double latestWindDirection() {return latestWeather().getWindDirection();}
+	public double latestWindDirection() {
+		return latestWeather().getWindDirection();
+	}
 
 	public double windChill() {
 		return convertWind(this.windSpeed, this.temperature);
@@ -86,10 +88,6 @@ public class Station extends Model {
 
 	private double toTwoDecimalPlaces(double num) {
 		return (int) (num * 100) / 100.0;
-	}
-
-	public double fahrenheit() {
-		return celsiusToFahrenheit(this.latestTemp);
 	}
 
 	public double lat() {
@@ -100,17 +98,6 @@ public class Station extends Model {
 		return decimalDegreesLng(this.longitude);
 	}
 
-	/**
-	 * Converts the latest temperature reading from Celsius to Fahrenheit
-	 *
-	 * @param temperature The temperature in Celsius
-	 * @return The temperature in Fahrenheit
-	 */
-	public double celsiusToFahrenheit(double temperature) {
-		double temp = readings.get(readings.size() - 1).getTemperature();
-		double fahrenheit = (temp * 9 / 5 + 32);
-		return fahrenheit;
-	}
 
 	/**
 	 * Calculates windchill using the latest readings for both temperature and wind speed

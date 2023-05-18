@@ -14,6 +14,17 @@ import java.util.List;
 public class StationAnalytics {
 
 	/**
+	 * Converts the latest temperature reading from Celsius to Fahrenheit
+	 * @return The temperature in Fahrenheit
+	 */
+	public static double celsiusToFahrenheit(List<Reading> readings) {
+
+		double temp = readings.get(readings.size() - 1).getTemperature();
+		double fahrenheit = (temp * 9 / 5 + 32);
+		return fahrenheit;
+	}
+
+	/**
 	 * Initialises an empty object to contain the minimum pressure
 	 * Loops through an array and if a lower reading is located that
 	 * lower reading is then set to be the minimum pressure.
