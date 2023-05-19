@@ -25,6 +25,5 @@ public class Dashboard extends Controller {
 		redirect("/dashboard");
 		//  Logger.info (station.name);
 	}
-
 }
 

@@ -12,7 +12,6 @@ public class Reading extends Model {
 	public double windSpeed;
 	public int pressure;
 	public double windDirection;
-
 	public double latitude;
 	public double longitude;
 

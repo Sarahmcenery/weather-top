@@ -115,34 +115,6 @@ public class Station extends Model {
 
 
 	/**
-	 * A switch statement to convert the weather code to the corresponding weather condition
-	 */
-	public String codeToText() {
-		{
-			switch ((readings.get(readings.size() - 1).getCode())) {
-				case 100:
-					return "Clear";
-				case 200:
-					return "Partial Clouds";
-				case 300:
-					return "Cloudy";
-				case 400:
-					return "Light Showers";
-				case 500:
-					return "Heavy Showers";
-				case 600:
-					return "Rain";
-				case 700:
-					return "Snow";
-				case 800:
-					return "Thunder";
-				default:
-					return "Invalid Code";
-			}
-		}
-	}
-
-	/**
 	 * Converts the latest wind speed in km/h to the correct number and label on the beaufort scale
 	 * Returns invalid reading if the user inputs a wind speed not on the beaufort scale
 	 */

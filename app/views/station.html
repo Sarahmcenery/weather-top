@@ -30,28 +30,28 @@
         <span class="icon-text">
           <span>Weather</span>
            <span class="icon">
-           #{if station.codeToText()=="Clear"} <i class="fa-solid fa-sun"></i>
+           #{if codeToText=="Clear"} <i class="fa-solid fa-sun"></i>
            #{/if}
-             #{elseif station.codeToText()=="Partial Clouds"} <i class="fa-solid fa-cloud-sun"></i>
+             #{elseif codeToText=="Partial Clouds"} <i class="fa-solid fa-cloud-sun"></i>
              #{/elseif}
-             #{elseif station.codeToText()=="Cloudy"} <i class="fa-solid fa-cloud"></i>
+             #{elseif codeToText=="Cloudy"} <i class="fa-solid fa-cloud"></i>
              #{/elseif}
-             #{elseif station.codeToText()=="Light Showers"} <i class="fa-solid fa-umbrella"></i>
+             #{elseif codeToText=="Light Showers"} <i class="fa-solid fa-umbrella"></i>
              #{/elseif}
-             #{elseif station.codeToText()=="Heavy Showers"} <i class="fa-solid fa-cloud-showers-heavy"></i>
+             #{elseif codeToText=="Heavy Showers"} <i class="fa-solid fa-cloud-showers-heavy"></i>
              #{/elseif}
-             #{elseif station.codeToText()=="Rain"} <i class="fa-solid fa-droplet"></i>
+             #{elseif codeToText=="Rain"} <i class="fa-solid fa-droplet"></i>
              #{/elseif}
-             #{elseif station.codeToText()=="Snow"} <i class="fa-solid fa-snowflake"></i>
+             #{elseif codeToText=="Snow"} <i class="fa-solid fa-snowflake"></i>
              #{/elseif}
-             #{elseif station.codeToText()=="Thunder"} <i class="fa-solid fa-bolt"></i>
+             #{elseif codeToText=="Thunder"} <i class="fa-solid fa-bolt"></i>
              #{/elseif}
         </span>
            </span>
         <br/>
         <br/>
         #{if station.readings.size() > 0}
-        <p>${station.codeToText()}
+        <p>${codeToText}
           #{/if}
           #{else}
           No reading available

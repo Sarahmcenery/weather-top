@@ -20,8 +20,9 @@ public class StationCtrl extends Controller {
 		Reading maximumWindSpeed = StationAnalytics.getMaximumWindSpeed(station.readings);
 		Reading minimumTemperature = StationAnalytics.getMinimumTemperature(station.readings);
 		Reading maximumTemperature = StationAnalytics.getMaximumTemperature(station.readings);
+		String codeToText = StationAnalytics.codeToText(station.readings);
 		Double fahrenheit = StationAnalytics.celsiusToFahrenheit(station.readings);
-		render("station.html", station, minimumPressure, maximumPressure, minimumWindSpeed, maximumWindSpeed, minimumTemperature, maximumTemperature, fahrenheit);
+		render("station.html", station, minimumPressure, maximumPressure, minimumWindSpeed, maximumWindSpeed, minimumTemperature, maximumTemperature, fahrenheit, codeToText);
 	}
 
 	public static void addReading(Long id, String name, int code, double temperature, double windSpeed, int pressure, int windDirection, double latitude, double longitude) {

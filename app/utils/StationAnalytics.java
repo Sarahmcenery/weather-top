@@ -15,19 +15,24 @@ public class StationAnalytics {
 
 	/**
 	 * Converts the latest temperature reading from Celsius to Fahrenheit
+	 *
 	 * @return The temperature in Fahrenheit
 	 */
 	public static double celsiusToFahrenheit(List<Reading> readings) {
-
-		double temp = readings.get(readings.size() - 1).getTemperature();
-		double fahrenheit = (temp * 9 / 5 + 32);
-		return fahrenheit;
+		if (readings.size() > 0) {
+			double temp = readings.get(readings.size() - 1).getTemperature();
+			double fahrenheit = (temp * 9 / 5 + 32);
+			return fahrenheit;
+		} else {
+			return 00;
+		}
 	}
 
 	/**
 	 * Initialises an empty object to contain the minimum pressure
 	 * Loops through an array and if a lower reading is located that
 	 * lower reading is then set to be the minimum pressure.
+	 *
 	 * @return minimumPressure
 	 */
 	public static Reading getMinimumPressure(List<Reading> readings) {
@@ -48,6 +53,7 @@ public class StationAnalytics {
 	 * Initialises an empty object to contain the maximum pressure
 	 * Loops through an array and if a higher reading is located that
 	 * higher reading is then set to be the maximum pressure.
+	 *
 	 * @return maximumPressure
 	 */
 	public static Reading getMaximumPressure(List<Reading> readings) {
@@ -68,6 +74,7 @@ public class StationAnalytics {
 	 * Initialises an empty object to contain the minimum wind speed
 	 * Loops through an array and if a lower reading is located that
 	 * lower reading is then set to be the minimum wind speed.
+	 *
 	 * @return minimumWindSpeed
 	 */
 	public static Reading getMinimumWindSpeed(List<Reading> readings) {
@@ -88,6 +95,7 @@ public class StationAnalytics {
 	 * Initialises an empty object to contain the maximum wind speed
 	 * Loops through an array and if a higher reading is located that
 	 * higher reading is then set to be the maximum wind speed.
+	 *
 	 * @return maximumWindSpeed
 	 */
 	public static Reading getMaximumWindSpeed(List<Reading> readings) {
@@ -108,6 +116,7 @@ public class StationAnalytics {
 	 * Initialises an empty object to contain the minimum temperature
 	 * Loops through an array and if a lower reading is located that
 	 * lower reading is then set to be the minimum temperature.
+	 *
 	 * @return minimumTemperature
 	 */
 	public static Reading getMinimumTemperature(List<Reading> readings) {
@@ -128,6 +137,7 @@ public class StationAnalytics {
 	 * Initialises an empty object to contain the maximum temperature
 	 * Loops through an array and if a higher reading is located that
 	 * higher reading is then set to be the maximum temperature.
+	 *
 	 * @return maximumTemperature
 	 */
 	public static Reading getMaximumTemperature(List<Reading> readings) {
@@ -142,5 +152,37 @@ public class StationAnalytics {
 			}
 		}
 		return maximumTemperature;
+	}
+
+	/**
+	 * A switch statement to convert the weather code to the corresponding weather condition
+	 */
+	public static String codeToText(List<Reading> readings) {
+		{
+			if (readings.size() > 0) {
+				switch ((readings.get(readings.size() - 1).getCode())) {
+					case 100:
+						return "Clear";
+					case 200:
+						return "Partial Clouds";
+					case 300:
+						return "Cloudy";
+					case 400:
+						return "Light Showers";
+					case 500:
+						return "Heavy Showers";
+					case 600:
+						return "Rain";
+					case 700:
+						return "Snow";
+					case 800:
+						return "Thunder";
+					default:
+						return "Invalid Code";
+				}
+			} else {
+				return "";
+			}
+		}
 	}
 }
