@@ -25,14 +25,8 @@ public class Station extends Model {
 	public String name;
 	@OneToMany(cascade = CascadeType.ALL)
 	public List<Reading> readings = new ArrayList<Reading>();
-	public int code;
 	public double windSpeed;
 	public double temperature;
-	public int pressure;
-	public double windDirection;
-	public int latestCode;
-	public double latestTemp;
-	public double celsiusToFahrenheit;
 	public double latitude;
 	public double longitude;
 	public Date date;

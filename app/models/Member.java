@@ -1,3 +1,9 @@
+/**
+ * This class represents a new user and their first name, last name, email and password
+ * When a new member signs up this information is saved to the database
+ *
+ * @author Sarah Mc Enery
+ */
 package models;
 
 import play.db.jpa.Model;

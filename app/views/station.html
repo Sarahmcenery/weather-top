@@ -65,7 +65,12 @@
         <span class="icon-text">
           <span>Temp</span>
             <span class="icon">
-               <i class="fas fa-temperature-full"></i>
+              #{if station.latestTemperature()<=4}  <span class="icon has-text-info"><i class="fa-solid fa-temperature-low "></i></span>
+               #{/if}
+                  #{elseif station.latestTemperature()>=20}  <span class="icon has-text-danger"><i class="fas fa-temperature-high "></i></span>
+                  #{/elseif}
+                    #{elseif station.latestTemperature()>4 && station.latestTemperature()<20}  <i class="fa-solid fa-temperature-half"></i>
+                    #{/elseif}
             </span>
         </span>
         <br/>
@@ -74,6 +79,8 @@
         <p> ${station.latestTemperature()} °C
           <br/>
           ${fahrenheit} °F
+          <br/>
+          <br/>
           <br/>
           Min: ${minimumTemperature.temperature} °C
           <br/>
@@ -90,7 +97,11 @@
         <span class="icon-text">
           <span>Wind</span>
             <span class="icon">
-               <i class="fas fa-wind"></i>
+               #{if station.latestWindSpeed()>88}  <span class="icon has-text-danger"><i
+                class="fas fa-wind "></i></span>
+               #{/if}
+                 #{elseif station.latestWindSpeed()} <i class="fas fa-wind "></i>
+                 #{/elseif}
             </span>
         </span>
         <br/>
@@ -101,6 +112,7 @@
           ${station.windDirectionToCompass()}
           <br/>
           Feels like ${station.windChill()} °C
+          <br/>
           <br/>
           Min: ${minimumWindSpeed.windSpeed} km/h
           <br/>
@@ -117,13 +129,21 @@
         <span class="icon-text">
           <span>Pressure</span>
             <span class="icon">
-              <i class="fa-sharp fa-solid fa-gauge-simple"></i>
+              #{if station.latestPressure()<=950}  <span class="icon has-text-info"><i class="fa-sharp fa-solid fa-gauge-simple "></i></span>
+             #{/if}
+              #{elseif station.latestPressure()>=1040}  <span class="icon has-text-danger"><i class="fa-sharp fa-solid fa-gauge-simple "></i></span>
+              #{/elseif}
+                 #{elseif station.latestPressure()>950 && station.latestPressure()<1040}  <i class="fa-sharp fa-solid fa-gauge-simple"></i>
+                 #{/elseif}
             </span>
         </span>
         <br/>
         <br/>
         #{if station.readings.size() > 0}
         <p> ${station.latestPressure()} hpa
+          <br/>
+          <br/>
+          <br/>
           <br/>
           Min: ${minimumPressure.pressure}
           <br/>

@@ -1,5 +1,6 @@
 /**
- * This class contains methods to return the minimum and maximum readings for pressure, wind speed and temperature .
+ * This class contains methods to return the minimum and maximum readings for pressure, wind speed and temperature.
+ * It also includes the method to convert Celsius to Fahrenheit
  *
  * @author Sarah Mc Enery
  */
@@ -7,7 +8,6 @@
 package utils;
 
 import models.Reading;
-import models.Station;
 
 import java.util.List;
 
