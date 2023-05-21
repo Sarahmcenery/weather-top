@@ -1,5 +1,6 @@
 package controllers;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import models.Station;
@@ -8,8 +9,15 @@ import play.Logger;
 import play.mvc.Controller;
 import utils.StationAnalytics;
 
+import javax.persistence.CascadeType;
+import javax.persistence.OneToMany;
+
+import java.util.Date;
 
 public class StationCtrl extends Controller {
+	@OneToMany(cascade = CascadeType.ALL)
+	public static List<Reading> readings = new ArrayList<Reading>();
+
 	public static void index(Long id) {
 
 		Station station = Station.findById(id);
@@ -26,21 +34,21 @@ public class StationCtrl extends Controller {
 	}
 
 	public static void addReading(Long id, String name, int code, double temperature, double windSpeed, int pressure, int windDirection, double latitude, double longitude) {
-		Reading reading = new Reading(name, code, temperature, windSpeed, pressure, windDirection, latitude, longitude);
+		Reading reading = new Reading(name, code, temperature, windSpeed, pressure, windDirection, latitude, longitude, new Date());
 		Station station = Station.findById(id);
 		station.readings.add(reading);
 		station.save();
 		redirect("/stations/" + id);
 	}
 
-	public static void deletereading (Long id, Long readingid)
-	{
+	public static void deletereading(Long id, Long readingid) {
 		Station station = Station.findById(id);
 		Reading reading = Reading.findById(readingid);
-		Logger.info ("Removing " + reading.name);
+		Logger.info("Removing " + reading.name);
 		station.readings.remove(reading);
 		station.save();
 		reading.delete();
 		render("station.html", station);
 	}
 }
+

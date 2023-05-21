@@ -4,6 +4,8 @@ import javax.persistence.Entity;
 
 import play.db.jpa.Model;
 
+import java.util.Date;
+
 @Entity
 public class Reading extends Model {
 	public String name;
@@ -14,11 +16,9 @@ public class Reading extends Model {
 	public double windDirection;
 	public double latitude;
 	public double longitude;
+	public Date date;
 
-	public Reading() {
-	}
-
-	public Reading(String name, int code, double temperature, double windSpeed, int pressure, double windDirection, double latitude, double longitude) {
+	public Reading(String name, int code, double temperature, double windSpeed, int pressure, double windDirection, double latitude, double longitude, Date date) {
 		this.name = name;
 		this.code = code;
 		this.temperature = temperature;
@@ -27,6 +27,7 @@ public class Reading extends Model {
 		this.windDirection = windDirection;
 		this.latitude = latitude;
 		this.longitude = longitude;
+		this.date = date;
 	}
 
 	//****************getters********************
@@ -57,15 +58,14 @@ public class Reading extends Model {
 	}
 
 	//returns the wind direction
-	public double getWindDirection() {
-		return windDirection;
-	}
+	public double getWindDirection() {return windDirection;}
 
 	//returns the latitude
 	public double getLatitude() {return latitude;}
 
 	//returns the longitude
 	public double getLongitude() {return longitude;}
+
 
 	//****************setters*********************
 
@@ -106,4 +106,5 @@ public class Reading extends Model {
 
 	//updates the longitude to the value passed as a parameter.The new longitude
 	public void setLongitude(double longitude) {this.longitude = longitude;}
+
 }

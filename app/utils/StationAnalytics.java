@@ -129,12 +129,8 @@ public class StationAnalytics {
 					minimumTemperature = reading;
 				}
 			}
-
-			return minimumTemperature;
-		} else {
-			return null;
 		}
-
+		return minimumTemperature;
 	}
 
 	/**

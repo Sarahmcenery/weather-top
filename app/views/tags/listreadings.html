@@ -1,16 +1,21 @@
 <table class="table is-bordered ">
   <thead class="has-background-grey-light">
   <tr>
+    <th>Time</th>
     <th>Code</th>
     <th>Temperature</th>
     <th>Wind Speed</th>
     <th>Wind Direction</th>
     <th>Pressure</th>
+    <th></th>
   </tr>
   </thead>
   <tbody>
   #{list items:_station.readings, as:'reading'}
   <tr>
+    <td >
+      ${reading.date}
+    </td>
     <td>
       ${reading.code}
     </td>

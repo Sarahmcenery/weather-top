@@ -11,6 +11,7 @@
 package models;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -32,10 +33,10 @@ public class Station extends Model {
 	public int latestCode;
 	public double latestTemp;
 	public double celsiusToFahrenheit;
-
 	public double latitude;
-
 	public double longitude;
+	public Date date;
+
 
 	public Station(String name, double latitude, double longitude) {
 		this.name = name;
@@ -48,7 +49,7 @@ public class Station extends Model {
 		if (readings.size() > 0) {
 			return readings.get(readings.size() - 1);
 		} else {
-			return new Reading(name, 0, 0, 0, 0, 0, 0, 0);
+			return new Reading(name, 0, 0, 0, 0, 0, 0, 0, date);
 		}
 	}
 
@@ -90,9 +91,7 @@ public class Station extends Model {
 		return (int) (num * 100) / 100.0;
 	}
 
-	public double lat() {
-		return decimalDegreesLat(this.latitude);
-	}
+	public double lat() {return decimalDegreesLat(this.latitude);}
 
 	public double lng() {
 		return decimalDegreesLng(this.longitude);
@@ -194,5 +193,6 @@ public class Station extends Model {
 			return codeString;
 		}
 	}
+
 }
 
